@@ -6,7 +6,7 @@ Copyright 2012 by Ken Lambert
 Resources for easy Python GUIs.
 
 LICENSE: This is open-source software released under the terms of the
-GPL (http://www.gnu.org/licenses/gpl.html).  Its capabilities mirror those 
+GPL (http://www.gnu.org/licenses/gpl.html).  Its capabilities mirror those
 of BreezyGUI and BreezySwing, open-source frameworks for writing GUIs in Java,
 written by Ken Lambert and Martin Osborne.
 
@@ -36,22 +36,23 @@ RAISED = tkinter.RAISED
 SINGLE = tkinter.SINGLE
 ACTIVE = tkinter.ACTIVE
 
+
 class EasyFrame(tkinter.Frame):
     """Represents an application window."""
 
-    def __init__(self, title = "", width = None, height = None,
-                 background = "white", resizable = True):
+    def __init__(self, title="", width=None, height=None,
+                 background="white", resizable=True):
         """Will shrink wrap the window around the widgets if width
         and height are not provided."""
-        tkinter.Frame.__init__(self, borderwidth = 4, relief = "sunken")
+        tkinter.Frame.__init__(self, borderwidth=4, relief="sunken")
         if width and height:
             self.setSize(width, height)
         self.master.title(title)
         self.grid()
         # Expand the frame within the window
-        self.master.rowconfigure(0, weight = 1)
-        self.master.columnconfigure(0, weight = 1)
-        self.grid(sticky = N+S+E+W)
+        self.master.rowconfigure(0, weight=1)
+        self.master.columnconfigure(0, weight=1)
+        self.grid(sticky=N + S + E + W)
         # Set the background color and resizability
         self.setBackground(background)
         self.setResizable(resizable)
@@ -67,7 +68,7 @@ class EasyFrame(tkinter.Frame):
 
     def setSize(self, width, height):
         """Resets the window's width and height in pixels."""
-        self.master.geometry(str(width)+ "x" + str(height))
+        self.master.geometry(str(width) + "x" + str(height))
 
     def setTitle(self, title):
         """Resets the window's title to title."""
@@ -77,191 +78,191 @@ class EasyFrame(tkinter.Frame):
     # the grid are required arguments.
 
     def addLabel(self, text, row, column,
-                 columnspan = 1, rowspan = 1,
-                 sticky = N+W, font = None,
-                 background = "white", foreground = "black"):
+                 columnspan=1, rowspan=1,
+                 sticky=N + W, font=None,
+                 background="white", foreground="black"):
         """Creates and inserts a label at the row and column,
         and returns the label."""
-        label = tkinter.Label(self, text = text, font = font,
-                              background = background,
-                              foreground = foreground)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        label.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        label = tkinter.Label(self, text=text, font=font,
+                              background=background,
+                              foreground=foreground)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        label.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return label
 
-    def addButton(self, text, row, column,
-                  columnspan = 1, rowspan = 1,
-                  command = lambda: None,
-                  state = NORMAL):
+    def addButton(self, text, row, column, columnspan=1, rowspan=1, command=lambda: None, state=NORMAL,
+                  background="#000000", foreground="#00FF00"):
         """Creates and inserts a button at the row and column,
-        and returns the button."""
-        button = tkinter.Button(self, text = text,
-                                command = command, state = state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        button.grid(row = row, column = column,
-                    columnspan = columnspan, rowspan = rowspan,
-                    padx = 5, pady = 5)
+        and returns the button.
+        :param background:
+        :param foreground: """
+        button = tkinter.Button(self, text=text,
+                                command=command, state=state, bg="#000000", fg="#00FF00")
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        button.grid(row=row, column=column,
+                    columnspan=columnspan, rowspan=rowspan,
+                    padx=5, pady=5)
         return button
 
     def addFloatField(self, value, row, column,
-                      columnspan = 1, rowspan = 1,
-                      width = 20, precision = None,
-                      sticky = N+E, state = NORMAL):
+                      columnspan=1, rowspan=1,
+                      width=20, precision=None,
+                      sticky=N + E, state=NORMAL):
         """Creates and inserts a float field at the row and column,
         and returns the float field."""
         field = FloatField(self, value, width, precision, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addIntegerField(self, value, row, column,
-                        columnspan = 1, rowspan = 1,
-                        width = 10, sticky = N+E, state = NORMAL):
+                        columnspan=1, rowspan=1,
+                        width=10, sticky=N + E, state=NORMAL):
         """Creates and inserts an integer field at the row and column,
         and returns the integer field."""
         field = IntegerField(self, value, width, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addTextField(self, text, row, column,
-                     columnspan = 1, rowspan = 1,
-                     width = 20, sticky = N+E, state = NORMAL):
+                     columnspan=1, rowspan=1,
+                     width=20, sticky=N + E, state=NORMAL):
         """Creates and inserts a text field at the row and column,
         and returns the text field."""
         field = TextField(self, text, width, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
-    def addTextArea(self, text, row, column, rowspan = 1, columnspan = 1,
-                    width = 80, height = 5, wrap = NONE):
+    def addTextArea(self, text, row, column, rowspan=1, columnspan=1,
+                    width=80, height=5, wrap=NONE):
         """Creates and inserts a multiline text area at the row and column,
         and returns the text area.  Vertical and horizontal scrollbars are
         provided."""
         frame = tkinter.Frame(self)
-        frame.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        self.columnconfigure(column, weight = 1)
-        self.rowconfigure(row, weight = 1)
-        xScroll = tkinter.Scrollbar(frame, orient = HORIZONTAL)
-        xScroll.grid(row = 1, column = 0, sticky = E+W)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        self.columnconfigure(column, weight=1)
+        self.rowconfigure(row, weight=1)
+        xScroll = tkinter.Scrollbar(frame, orient=HORIZONTAL)
+        xScroll.grid(row=1, column=0, sticky=E + W)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         area = TextArea(frame, text, width, height,
                         xScroll.set, yScroll.set, wrap)
-        area.grid(row = 0, column = 0,
-                  padx = 5, pady = 5, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        area.grid(row=0, column=0,
+                  padx=5, pady=5, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         xScroll["command"] = area.xview
         yScroll["command"] = area.yview
         return area
 
-    def addListbox(self, row, column, rowspan = 1, columnspan = 1,
-                   width = 10, height = 5, listItemSelected = lambda index: index):
+    def addListbox(self, row, column, rowspan=1, columnspan=1,
+                   width=10, height=5, listItemSelected=lambda index: index):
         """Creates and inserts a scrolling list box at the row and column, with a
         width and height in lines and columns of text, and a default item selection
         method, and returns the list box."""
         frame = tkinter.Frame(self)
-        frame.grid(row = row, column = column, columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        self.columnconfigure(column, weight = 1)
-        self.rowconfigure(row, weight = 1)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column, columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        self.columnconfigure(column, weight=1)
+        self.rowconfigure(row, weight=1)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         listBox = EasyListbox(frame, width, height, yScroll.set, listItemSelected)
-        listBox.grid(row = 0, column = 0, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        listBox.grid(row=0, column=0, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         yScroll["command"] = listBox.yview
         return listBox
 
-    def addCanvas(self, canvas = None, row = 0, column = 0,
-                  rowspan = 1, columnspan = 1, width = 200, height = 100,
-                  background = "white"):
+    def addCanvas(self, canvas=None, row=0, column=0,
+                  rowspan=1, columnspan=1, width=200, height=100,
+                  background="white"):
         """Creates and inserts a canvas at the row and column,
         and returns the canvas."""
         if not canvas:
-            canvas = EasyCanvas(self, width = width, height = height,
-                                background = background)
-        canvas.grid(row = row, column = column,
-                    rowspan = rowspan, columnspan = columnspan,
-                    sticky = W+E+N+S)
-        self.columnconfigure(column, weight = 10)
-        self.rowconfigure(row, weight = 10)
+            canvas = EasyCanvas(self, width=width, height=height,
+                                background=background)
+        canvas.grid(row=row, column=column,
+                    rowspan=rowspan, columnspan=columnspan,
+                    sticky=W + E + N + S)
+        self.columnconfigure(column, weight=10)
+        self.rowconfigure(row, weight=10)
         return canvas
 
-    def addScale(self, row, column, rowspan = 1, columnspan = 1,
-                 command = lambda value: value, from_ = 0, to = 0,
-                 label = "", length = 100, orient = HORIZONTAL,
-                 resolution = 1, tickinterval = 0):
+    def addScale(self, row, column, rowspan=1, columnspan=1,
+                 command=lambda value: value, from_=0, to=0,
+                 label="", length=100, orient=HORIZONTAL,
+                 resolution=1, tickinterval=0):
         """Creates and inserts a scale at the row and column,
         and returns the scale."""
-        scale = tkinter.Scale(self, command = command, from_ = from_, to = to,
-                              label = label, length = length,
-                              orient = orient, resolution = resolution,
-                              tickinterval = tickinterval, relief = "sunken",
-                              borderwidth = 4)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        scale.grid(row = row, column = column, columnspan = columnspan,
-                   rowspan = rowspan, sticky = N+S+E+W)
+        scale = tkinter.Scale(self, command=command, from_=from_, to=to,
+                              label=label, length=length,
+                              orient=orient, resolution=resolution,
+                              tickinterval=tickinterval, relief="sunken",
+                              borderwidth=4)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        scale.grid(row=row, column=column, columnspan=columnspan,
+                   rowspan=rowspan, sticky=N + S + E + W)
         return scale
 
-    def addMenuBar(self, row, column, rowspan = 1, columnspan = 1,
-                   orient = "horizontal"):
+    def addMenuBar(self, row, column, rowspan=1, columnspan=1,
+                   orient="horizontal"):
         """Creates and inserts a menu bar at the row and column,
         and returns the menu bar."""
         if not orient in ("horizontal", "vertical"):
             raise ValueError("orient must be horizontal or vertical")
         menuBar = EasyMenuBar(self, orient)
-        menuBar.grid(row = row, column = column,
-                     rowspan = rowspan, columnspan = columnspan,
-                     sticky = N+W)
+        menuBar.grid(row=row, column=column,
+                     rowspan=rowspan, columnspan=columnspan,
+                     sticky=N + W)
         return menuBar
 
     def addCheckbutton(self, text, row, column,
-                       rowspan = 1, columnspan = 1,
-                       sticky = N+S+E+W, command = lambda : 0):
+                       rowspan=1, columnspan=1,
+                       sticky=N + S + E + W, command=lambda: 0):
         """Creates and inserts check button at the row and column,
         and returns the check button."""
         cb = EasyCheckbutton(self, text, command)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        cb.grid(row = row, column = column,
-                columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        cb.grid(row=row, column=column,
+                columnspan=columnspan, rowspan=rowspan,
+                padx=5, pady=5, sticky=sticky)
         return cb
 
     def addRadiobuttonGroup(self, row, column,
-                            rowspan = 1, columnspan = 1, orient = VERTICAL):
+                            rowspan=1, columnspan=1, orient=VERTICAL):
         """Creates and returns a radio button group."""
         return EasyRadiobuttonGroup(self, row, column, rowspan, columnspan, orient)
 
     # Added 12-18-2012
     def addPanel(self, row, column,
-                 rowspan = 1, columnspan = 1, background = "white"):
+                 rowspan=1, columnspan=1, background="white"):
         """Creates and returns a panel."""
         return EasyPanel(self, row, column, rowspan, columnspan, background)
 
     # Method to pop up a message box from this window.
 
-    def messageBox(self, title = "", message = "", width = 25, height = 5):
+    def messageBox(self, title="", message="", width=25, height=5):
         """Creates and pops up a message box, with the given title,
         message, and width and height in rows and columns of text."""
         dlg = MessageBox(self, title, message, width, height)
@@ -269,12 +270,13 @@ class EasyFrame(tkinter.Frame):
 
     # Method to pop up a prompter box from this window.
 
-    def prompterBox(self, title = "", promptString = "", inputText = "", fieldWidth = 20):
+    def prompterBox(self, title="", promptString="", inputText="", fieldWidth=20):
         """Creates and pops up a prompter box, with the given title, prompt,
         input text, and field width in columns of text.
         Returns the text entered at the prompt."""
         dlg = PrompterBox(self, title, promptString, inputText, fieldWidth)
         return dlg.getText()
+
 
 # Classes for easy widgets
 
@@ -286,8 +288,8 @@ class AbstractField(tkinter.Entry):
         self.var = tkinter.StringVar()
         self.setValue(value)
         tkinter.Entry.__init__(self, parent,
-                               textvariable = self.var,
-                               width = width, state = state)
+                               textvariable=self.var,
+                               width=width, state=state)
 
     def setValue(self, value):
         self.var.set(value)
@@ -350,17 +352,18 @@ class TextField(AbstractField):
         """Replaces the string contained in the field."""
         self.setValue(text)
 
+
 class TextArea(tkinter.Text):
     """Represents a box for I/O of multiline text."""
 
     def __init__(self, parent, text, width, height,
                  xscrollcommand, yscrollcommand, wrap):
         tkinter.Text.__init__(self, parent,
-                              width = width,
-                              height = height,
-                              wrap = wrap,
-                              xscrollcommand = xscrollcommand,
-                              yscrollcommand = yscrollcommand)
+                              width=width,
+                              height=height,
+                              wrap=wrap,
+                              xscrollcommand=xscrollcommand,
+                              yscrollcommand=yscrollcommand)
         self.setText(text)
 
     def getText(self):
@@ -371,11 +374,12 @@ class TextArea(tkinter.Text):
         """Replaces the string contained in the text area."""
         self.delete("1.0", END)
         self.insert("1.0", text)
-        
+
     def appendText(self, text):
         """Inserts the text after the string contained in
         the text area."""
         self.insert(END, text)
+
 
 class EasyListbox(tkinter.Listbox):
     """Represents a list box."""
@@ -383,9 +387,9 @@ class EasyListbox(tkinter.Listbox):
     def __init__(self, parent, width, height, yscrollcommand, listItemSelected):
         self._listItemSelected = listItemSelected
         tkinter.Listbox.__init__(self, parent,
-                                 width = width, height = height,
-                                 yscrollcommand = yscrollcommand,
-                                 selectmode = SINGLE)
+                                 width=width, height=height,
+                                 yscrollcommand=yscrollcommand,
+                                 selectmode=SINGLE)
         self.bind("<<ListboxSelect>>", self.triggerListItemSelected)
 
     def triggerListItemSelected(self, event):
@@ -433,36 +437,37 @@ class EasyListbox(tkinter.Listbox):
             return tup.index(item)
         else:
             return -1
-        
+
+
 class EasyRadiobuttonGroup(tkinter.Frame):
     """Represents a group of radio buttons, only one of which
     is selected at any given time."""
 
     def __init__(self, parent, row, column, rowspan, columnspan, orient):
         tkinter.Frame.__init__(self, parent)
-        self.grid(row = row, column = column,
-                  rowspan = rowspan, columnspan = columnspan,
-                  sticky = N+S+E+W)
+        self.grid(row=row, column=column,
+                  rowspan=rowspan, columnspan=columnspan,
+                  sticky=N + S + E + W)
         self._commonVar = tkinter.StringVar("")
         self._buttons = dict()
         self._orient = orient
         self._buttonRow = self._buttonColumn = 0
 
-    def addRadiobutton(self, text, command = lambda : 0):
+    def addRadiobutton(self, text, command=lambda: 0):
         """Creates a button with the given text and command, adds it to the group,
         and returns the button."""
         if text in self._buttons:
             raise ValueError("Button with this label already in the group")
-        button = tkinter.Radiobutton(self, text = text, value = text,
-                                     command = command,
-                                     variable = self._commonVar)
+        button = tkinter.Radiobutton(self, text=text, value=text,
+                                     command=command,
+                                     variable=self._commonVar)
         self._buttons[text] = button
-        button.grid(row = self._buttonRow, column = self._buttonColumn, sticky = N+W)
+        button.grid(row=self._buttonRow, column=self._buttonColumn, sticky=N + W)
         if self._orient == VERTICAL:
-            self.rowconfigure(self._buttonRow, weight = 1)
+            self.rowconfigure(self._buttonRow, weight=1)
             self._buttonRow += 1
         else:
-            self.columnconfigure(self._buttonColumn, weight = 1)
+            self.columnconfigure(self._buttonColumn, weight=1)
             self._buttonColumn += 1
         return button
 
@@ -473,21 +478,22 @@ class EasyRadiobuttonGroup(tkinter.Frame):
 
     def setSelectedButton(self, button):
         self._commonVar.set(button["value"])
-    
+
 
 class EasyCheckbutton(tkinter.Checkbutton):
     """Represents a check button."""
 
     def __init__(self, parent, text, command):
         self._variable = tkinter.IntVar()
-        tkinter.Checkbutton.__init__(self, parent, text = text,
-                                     variable = self._variable,
-                                     command = command)
+        tkinter.Checkbutton.__init__(self, parent, text=text,
+                                     variable=self._variable,
+                                     command=command)
 
     def isChecked(self):
         """Returns True if the button is checked or
         False otherwise."""
         return self._variable.get() != 0
+
 
 class EasyMenuBar(tkinter.Frame):
     """Represents a menu bar."""
@@ -495,13 +501,13 @@ class EasyMenuBar(tkinter.Frame):
     def __init__(self, parent, orient):
         self._orient = orient
         self._row = self._column = 0
-        tkinter.Frame.__init__(self, parent, relief = RAISED, borderwidth = 1)
+        tkinter.Frame.__init__(self, parent, relief=RAISED, borderwidth=1)
 
-    def addMenu(self, text, state = NORMAL):
+    def addMenu(self, text, state=NORMAL):
         """Creates and inserts a menu into the
         menubar, and returns the menu."""
-        menu = EasyMenubutton(self, text, state = state)
-        menu.grid(row = self._row, column = self._column)
+        menu = EasyMenubutton(self, text, state=state)
+        menu.grid(row=self._row, column=self._column)
         if self._orient == "horizontal":
             self._column += 1
         else:
@@ -514,14 +520,14 @@ class EasyMenubutton(tkinter.Menubutton):
 
     def __init__(self, menuBar, text, state):
         tkinter.Menubutton.__init__(self, menuBar,
-                                    text = text, state = state)
+                                    text=text, state=state)
         self.menu = tkinter.Menu(self)
         self["menu"] = self.menu
         self._currentIndex = -1
-        
-    def addMenuItem(self, text, command, state = NORMAL):
+
+    def addMenuItem(self, text, command, state=NORMAL):
         """Inserts a menu option in the given menu."""
-        self.menu.add_command(label = text, command = command, state = state)
+        self.menu.add_command(label=text, command=command, state=state)
         self._currentIndex += 1
         return EasyMenuItem(self, self._currentIndex)
 
@@ -535,27 +541,27 @@ class EasyMenuItem(object):
 
     def setState(self, state):
         """Sets the state of the item to state."""
-        self._menu.menu.entryconfigure(self._index, state = state)
-        
+        self._menu.menu.entryconfigure(self._index, state=state)
+
 
 class EasyCanvas(tkinter.Canvas):
     """Represents a rectangular area for interactive drawing of shapes.
     Supports simple commands for drawing lines, rectangles, and ovals,
     as well as methods for responding to mouse events in the canvas."""
 
-    def __init__(self, parent, width = None, height = None,
-                 background = "white"):
+    def __init__(self, parent, width=None, height=None,
+                 background="white"):
         tkinter.Canvas.__init__(self, parent,
-                                width = width, height = height,
-                                background = background)
+                                width=width, height=height,
+                                background=background)
         self.bind("<Double-Button-1>", self.mouseDoubleClicked)
         self.bind("<ButtonPress-1>", self.mousePressed)
         self.bind("<ButtonRelease-1>", self.mouseReleased)
         self.bind("<B1-Motion>", self.mouseDragged)
 
-    # Mouse event handling methods.  One or more of these methods can 
+    # Mouse event handling methods.  One or more of these methods can
     # be overridden in the subclass to implement the required actions.
-    
+
     # The event argument can be used to extract the current mouse
     # cursor coordinates (event.x and event.y).
 
@@ -568,7 +574,7 @@ class EasyCanvas(tkinter.Canvas):
         """Triggered when the mouse is
         pressed in the area of this canvas."""
         return
-        
+
     def mouseReleased(self, event):
         """Triggered when the mouse is
         released in the area of this canvas."""
@@ -588,41 +594,41 @@ class EasyCanvas(tkinter.Canvas):
         return self["height"]
 
     def drawLine(self, x0, y0, x1, y1,
-                 fill = "black", width = 1):
+                 fill="black", width=1):
         item = self.create_line(x0, y0, x1, y1)
-        self.itemconfig(item, fill = fill, width = width)
+        self.itemconfig(item, fill=fill, width=width)
         return item
 
     def drawRectangle(self, x0, y0, x1, y1,
-                      outline = "black", fill = None):
+                      outline="black", fill=None):
         """Draws a rectangle with the given corner points,
         outline color, and fill color."""
         item = self.create_rectangle(x0, y0, x1, y1)
-        self.itemconfig(item, outline = outline, fill = fill)
+        self.itemconfig(item, outline=outline, fill=fill)
         return item
 
     def drawOval(self, x0, y0, x1, y1,
-                 outline = "black", fill = None):
+                 outline="black", fill=None):
         """Draws an ovel within the given corner points,
         with the given outline color and fill color."""
         item = self.create_oval(x0, y0, x1, y1)
-        self.itemconfig(item, outline = outline, fill = fill)
+        self.itemconfig(item, outline=outline, fill=fill)
         return item
 
-    def drawText(self, text, x, y, fill = "black"):
+    def drawText(self, text, x, y, fill="black"):
         """Draws the given text (a string) at the given coordinates
         with the given fill color.  The string is centered vertically
         and horizontally at the given coordinates."""
         item = self.create_text(x, y)
-        self.itemconfig(item, text = text, fill = fill)
+        self.itemconfig(item, text=text, fill=fill)
         return item
 
-    def drawImage(self, image, x, y, anchor = CENTER):
+    def drawImage(self, image, x, y, anchor=CENTER):
         """Draws the given image (a PhotoImage) at the given coordinates.
         The image is centered at the given coordinates by default."""
-        item = self.create_image(x, y, image = image,
-                                 anchor = anchor)
-        self.itemconfig(item, image = image, anchor = anchor)
+        item = self.create_image(x, y, image=image,
+                                 anchor=anchor)
+        self.itemconfig(item, image=image, anchor=anchor)
         return item
 
     def deleteItem(self, item):
@@ -630,13 +636,14 @@ class EasyCanvas(tkinter.Canvas):
         number from the canvas."""
         self.delete(item)
 
+
 # Support classes for dialogs.
 
 class MessageBox(tkinter.simpledialog.Dialog):
     """Represents a message dialog with a scrollable text area."""
 
     @classmethod
-    def message(cls, title = "", message = "", width = 25, height = 5):
+    def message(cls, title="", message="", width=25, height=5):
         MessageBox(tkinter.Frame(), title, message, width, height)
 
     def __init__(self, parent, title, message, width, height):
@@ -649,12 +656,12 @@ class MessageBox(tkinter.simpledialog.Dialog):
 
     def body(self, master):
         self.resizable(0, 0)
-        yScroll = tkinter.Scrollbar(master, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
-        output = tkinter.Text(master, width = self._width, height = self._height,
-                      padx = 5, pady = 5, wrap = WORD,
-                      yscrollcommand = yScroll.set)
-        output.grid(row = 0, column = 0, sticky = N+W+S+E)
+        yScroll = tkinter.Scrollbar(master, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
+        output = tkinter.Text(master, width=self._width, height=self._height,
+                              padx=5, pady=5, wrap=WORD,
+                              yscrollcommand=yScroll.set)
+        output.grid(row=0, column=0, sticky=N + W + S + E)
         output.insert("1.0", self._message)
         output["state"] = DISABLED
         yScroll["command"] = output.yview
@@ -664,8 +671,8 @@ class MessageBox(tkinter.simpledialog.Dialog):
         '''add standard button box.
         override if you do not want the standard buttons'''
         box = tkinter.Frame(self)
-        w = tkinter.Button(box, text="OK", width = 10,
-                           command = self.ok, default = ACTIVE)
+        w = tkinter.Button(box, text="OK", width=10,
+                           command=self.ok, default=ACTIVE)
         w.pack()
         self.bind("<Return>", self.ok)
         box.pack()
@@ -677,11 +684,12 @@ class MessageBox(tkinter.simpledialog.Dialog):
     def modified(self):
         return self._modified
 
+
 class PrompterBox(tkinter.simpledialog.Dialog):
     """Represents an input dialog with a text field."""
 
     @classmethod
-    def prompt(cls, title = "", promptString = "", inputText = "", fieldWidth = 20):
+    def prompt(cls, title="", promptString="", inputText="", fieldWidth=20):
         """Creates and pops up an input dialog."""
         dlg = PrompterBox(tkinter.Frame(), title, promptString, inputText, fieldWidth)
         return dlg.getText()
@@ -696,18 +704,18 @@ class PrompterBox(tkinter.simpledialog.Dialog):
 
     def body(self, master):
         self.resizable(0, 0)
-        label = tkinter.Label(master, text = self._prompt)
-        label.grid(row = 0, column = 0, padx = 5, sticky = N+W+S+E)
+        label = tkinter.Label(master, text=self._prompt)
+        label.grid(row=0, column=0, padx=5, sticky=N + W + S + E)
         self._field = TextField(master, self._text, self._width, NORMAL)
-        self._field.grid(row = 1, column = 0, padx = 5, sticky = N+W+S+E)
+        self._field.grid(row=1, column=0, padx=5, sticky=N + W + S + E)
         return self._field
 
     def buttonbox(self):
         '''add standard button box.
         override if you do not want the standard buttons'''
         box = tkinter.Frame(self)
-        w = tkinter.Button(box, text="OK", width = 10,
-                           command = self.ok, default = ACTIVE)
+        w = tkinter.Button(box, text="OK", width=10,
+                           command=self.ok, default=ACTIVE)
         w.pack()
         self.bind("<Return>", self.ok)
         box.pack()
@@ -723,11 +731,12 @@ class PrompterBox(tkinter.simpledialog.Dialog):
         """Returns the text currently in the text field."""
         return self._field.getText()
 
+
 class EasyDialog(tkinter.simpledialog.Dialog):
     """Represents a general-purpose dialog.  Subclasses should include
     body and apply methods."""
 
-    def __init__(self, parent, title = ""):
+    def __init__(self, parent, title=""):
         """Set up the window and widgets."""
         self._modified = False
         tkinter.simpledialog.Dialog.__init__(self, parent, title)
@@ -740,204 +749,204 @@ class EasyDialog(tkinter.simpledialog.Dialog):
         self._modified = True
 
     def addLabel(self, master, text, row, column,
-                 columnspan = 1, rowspan = 1,
-                 sticky = N+W, font = None):
+                 columnspan=1, rowspan=1,
+                 sticky=N + W, font=None):
         """Creates and inserts a label at the row and column,
         and returns the label."""
-        label = tkinter.Label(master, text = text, font = font)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        label.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        label = tkinter.Label(master, text=text, font=font)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        label.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return label
 
     def addButton(self, master, text, row, column,
-                  columnspan = 1, rowspan = 1,
-                  command = lambda: None,
-                  state = NORMAL):
+                  columnspan=1, rowspan=1,
+                  command=lambda: None,
+                  state=NORMAL):
         """Creates and inserts a button at the row and column,
         and returns the button."""
-        button = tkinter.Button(master, text = text,
-                                command = command, state = state)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        button.grid(row = row, column = column,
-                    columnspan = columnspan, rowspan = rowspan,
-                    padx = 5, pady = 5)
+        button = tkinter.Button(master, text=text,
+                                command=command, state=state)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        button.grid(row=row, column=column,
+                    columnspan=columnspan, rowspan=rowspan,
+                    padx=5, pady=5)
         return button
 
     def addFloatField(self, master, value, row, column,
-                      columnspan = 1, rowspan = 1,
-                      width = 20, precision = None,
-                      sticky = N+E, state = NORMAL):
+                      columnspan=1, rowspan=1,
+                      width=20, precision=None,
+                      sticky=N + E, state=NORMAL):
         """Creates and inserts a float field at the row and column,
         and returns the float field."""
         field = FloatField(master, value, width, precision, state)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addIntegerField(self, master, value, row, column,
-                        columnspan = 1, rowspan = 1,
-                        width = 10, sticky = N+E, state = NORMAL):
+                        columnspan=1, rowspan=1,
+                        width=10, sticky=N + E, state=NORMAL):
         """Creates and inserts an integer field at the row and column,
         and returns the integer field."""
         field = IntegerField(master, value, width, state)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addTextField(self, master, text, row, column,
-                     columnspan = 1, rowspan = 1,
-                     width = 20, sticky = N+E, state = NORMAL):
+                     columnspan=1, rowspan=1,
+                     width=20, sticky=N + E, state=NORMAL):
         """Creates and inserts a text field at the row and column,
         and returns the text field."""
         field = TextField(master, text, width, state)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addCheckbutton(self, master, text, row, column,
-                       rowspan = 1, columnspan = 1,
-                       sticky = N+S+E+W, command = lambda : 0):
+                       rowspan=1, columnspan=1,
+                       sticky=N + S + E + W, command=lambda: 0):
         """Creates and inserts check button at the row and column,
         and returns the check button."""
         cb = EasyCheckbutton(master, text, command)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        cb.grid(row = row, column = column,
-                columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        cb.grid(row=row, column=column,
+                columnspan=columnspan, rowspan=rowspan,
+                padx=5, pady=5, sticky=sticky)
         return cb
 
     def addRadiobuttonGroup(self, master, row, column,
-                            rowspan = 1, columnspan = 1, orient = VERTICAL):
+                            rowspan=1, columnspan=1, orient=VERTICAL):
         """Creates and returns a radio button group."""
         return EasyRadiobuttonGroup(master, row, column, rowspan, columnspan, orient)
 
-    def addScale(self, master, row, column, rowspan = 1, columnspan = 1,
-                 command = lambda value: value, from_ = 0, to = 0,
-                 label = "", length = 100, orient = HORIZONTAL,
-                 resolution = 1, tickinterval = 0):
+    def addScale(self, master, row, column, rowspan=1, columnspan=1,
+                 command=lambda value: value, from_=0, to=0,
+                 label="", length=100, orient=HORIZONTAL,
+                 resolution=1, tickinterval=0):
         """Creates and inserts a scale at the row and column,
         and returns the scale."""
-        scale = tkinter.Scale(master, command = command, from_ = from_, to = to,
-                              label = label, length = length,
-                              orient = orient, resolution = resolution,
-                              tickinterval = tickinterval, relief = "sunken",
-                              borderwidth = 4)
-        master.rowconfigure(row, weight = 1)
-        master.columnconfigure(column, weight = 1)
-        scale.grid(row = row, column = column, columnspan = columnspan,
-                   rowspan = rowspan, sticky = N+S+E+W)
+        scale = tkinter.Scale(master, command=command, from_=from_, to=to,
+                              label=label, length=length,
+                              orient=orient, resolution=resolution,
+                              tickinterval=tickinterval, relief="sunken",
+                              borderwidth=4)
+        master.rowconfigure(row, weight=1)
+        master.columnconfigure(column, weight=1)
+        scale.grid(row=row, column=column, columnspan=columnspan,
+                   rowspan=rowspan, sticky=N + S + E + W)
         return scale
 
-    def addTextArea(self, master, text, row, column, rowspan = 1, columnspan = 1,
-                    width = 80, height = 5, wrap = NONE):
+    def addTextArea(self, master, text, row, column, rowspan=1, columnspan=1,
+                    width=80, height=5, wrap=NONE):
         """Creates and inserts a multiline text area at the row and column,
         and returns the text area.  Vertical and horizontal scrollbars are
         provided."""
         frame = tkinter.Frame(master)
-        frame.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        master.columnconfigure(column, weight = 1)
-        master.rowconfigure(row, weight = 1)
-        xScroll = tkinter.Scrollbar(frame, orient = HORIZONTAL)
-        xScroll.grid(row = 1, column = 0, sticky = E+W)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        master.columnconfigure(column, weight=1)
+        master.rowconfigure(row, weight=1)
+        xScroll = tkinter.Scrollbar(frame, orient=HORIZONTAL)
+        xScroll.grid(row=1, column=0, sticky=E + W)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         area = TextArea(frame, text, width, height,
                         xScroll.set, yScroll.set, wrap)
-        area.grid(row = 0, column = 0,
-                  padx = 5, pady = 5, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        area.grid(row=0, column=0,
+                  padx=5, pady=5, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         xScroll["command"] = area.xview
         yScroll["command"] = area.yview
         return area
 
-    def addListbox(self, master, row, column, rowspan = 1, columnspan = 1,
-                   width = 10, height = 5, listItemSelected = lambda index: index):
+    def addListbox(self, master, row, column, rowspan=1, columnspan=1,
+                   width=10, height=5, listItemSelected=lambda index: index):
         """Creates and inserts a scrolling list box at the row and column, with a
         width and height in lines and columns of text, and a default item selection
         method, and returns the list box."""
         frame = tkinter.Frame(master)
-        frame.grid(row = row, column = column, columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        master.columnconfigure(column, weight = 1)
-        master.rowconfigure(row, weight = 1)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column, columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        master.columnconfigure(column, weight=1)
+        master.rowconfigure(row, weight=1)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         listBox = EasyListbox(frame, width, height, yScroll.set, listItemSelected)
-        listBox.grid(row = 0, column = 0, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        listBox.grid(row=0, column=0, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         yScroll["command"] = listBox.yview
         return listBox
 
-    def addCanvas(self, master, canvas = None, row = 0, column = 0,
-                  rowspan = 1, columnspan = 1, width = 200, height = 100,
-                  background = "white"):
+    def addCanvas(self, master, canvas=None, row=0, column=0,
+                  rowspan=1, columnspan=1, width=200, height=100,
+                  background="white"):
         """Creates and inserts a canvas at the row and column,
         and returns the canvas."""
         if not canvas:
-            canvas = EasyCanvas(master, width = width, height = height,
-                                background = background)
-        canvas.grid(row = row, column = column,
-                    rowspan = rowspan, columnspan = columnspan,
-                    sticky = W+E+N+S)
-        master.columnconfigure(column, weight = 10)
-        master.rowconfigure(row, weight = 10)
+            canvas = EasyCanvas(master, width=width, height=height,
+                                background=background)
+        canvas.grid(row=row, column=column,
+                    rowspan=rowspan, columnspan=columnspan,
+                    sticky=W + E + N + S)
+        master.columnconfigure(column, weight=10)
+        master.rowconfigure(row, weight=10)
         return canvas
 
-    def addMenuBar(self, master, row, column, rowspan = 1, columnspan = 1,
-                   orient = "horizontal"):
+    def addMenuBar(self, master, row, column, rowspan=1, columnspan=1,
+                   orient="horizontal"):
         """Creates and inserts a menu bar at the row and column,
         and returns the menu bar."""
         if not orient in ("horizontal", "vertical"):
             raise ValueError("orient must be horizontal or vertical")
         menuBar = EasyMenuBar(master, orient)
-        menuBar.grid(row = row, column = column,
-                     rowspan = rowspan, columnspan = columnspan,
-                     sticky = N+W)
+        menuBar.grid(row=row, column=column,
+                     rowspan=rowspan, columnspan=columnspan,
+                     sticky=N + W)
         return menuBar
 
-    def messageBox(self, title = "", message = "", width = 25, height = 5):
+    def messageBox(self, title="", message="", width=25, height=5):
         """Creates and pops up a message box, with the given title,
         message, and width and height in rows and columns of text."""
         dlg = MessageBox(self, title, message, width, height)
         return dlg.modified()
 
         # Added 12-18-2012
+
     def addPanel(self, master, row, column,
-                 rowspan = 1, columnspan = 1, background = "white"):
+                 rowspan=1, columnspan=1, background="white"):
         """Creates and returns a panel."""
         return EasyPanel(master, row, column, rowspan, columnspan, background)
 
 
- 
 # Added 12-18-2012
 class EasyPanel(tkinter.Frame):
     """Organizes a group of widgets in a panel (nested frame)."""
 
     def __init__(self, parent, row, column, rowspan, columnspan, background):
         tkinter.Frame.__init__(self, parent)
-        parent.rowconfigure(row, weight = 1)
-        parent.columnconfigure(column, weight = 1)
-        self.grid(row = row, column = column,
-                  rowspan = rowspan, columnspan = columnspan,
-                  sticky = N+S+E+W)
+        parent.rowconfigure(row, weight=1)
+        parent.columnconfigure(column, weight=1)
+        self.grid(row=row, column=column,
+                  rowspan=rowspan, columnspan=columnspan,
+                  sticky=N + S + E + W)
         self.setBackground(background)
 
     def setBackground(self, color):
@@ -945,184 +954,184 @@ class EasyPanel(tkinter.Frame):
         self["background"] = color
 
     def addButton(self, text, row, column,
-                  columnspan = 1, rowspan = 1,
-                  command = lambda: None,
-                  state = NORMAL):
+                  columnspan=1, rowspan=1,
+                  command=lambda: None,
+                  state=NORMAL):
         """Creates and inserts a button at the row and column,
         and returns the button."""
-        button = tkinter.Button(self, text = text,
-                                command = command, state = state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        button.grid(row = row, column = column,
-                    columnspan = columnspan, rowspan = rowspan,
-                    padx = 5, pady = 5)
+        button = tkinter.Button(self, text=text,
+                                command=command, state=state)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        button.grid(row=row, column=column,
+                    columnspan=columnspan, rowspan=rowspan,
+                    padx=5, pady=5)
         return button
 
     def addLabel(self, text, row, column,
-                 columnspan = 1, rowspan = 1,
-                 sticky = N+W, font = None,
-                 background = "white", foreground = "black"):
+                 columnspan=1, rowspan=1,
+                 sticky=N + W, font=None,
+                 background="white", foreground="black"):
         """Creates and inserts a label at the row and column,
         and returns the label."""
-        label = tkinter.Label(self, text = text, font = font,
-                              background = background,
-                              foreground = foreground)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        label.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        label = tkinter.Label(self, text=text, font=font,
+                              background=background,
+                              foreground=foreground)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        label.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return label
 
     def addFloatField(self, value, row, column,
-                      columnspan = 1, rowspan = 1,
-                      width = 20, precision = None,
-                      sticky = N+E, state = NORMAL):
+                      columnspan=1, rowspan=1,
+                      width=20, precision=None,
+                      sticky=N + E, state=NORMAL):
         """Creates and inserts a float field at the row and column,
         and returns the float field."""
         field = FloatField(self, value, width, precision, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addIntegerField(self, value, row, column,
-                        columnspan = 1, rowspan = 1,
-                        width = 10, sticky = N+E, state = NORMAL):
+                        columnspan=1, rowspan=1,
+                        width=10, sticky=N + E, state=NORMAL):
         """Creates and inserts an integer field at the row and column,
         and returns the integer field."""
         field = IntegerField(self, value, width, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
     def addTextField(self, text, row, column,
-                     columnspan = 1, rowspan = 1,
-                     width = 20, sticky = N+E, state = NORMAL):
+                     columnspan=1, rowspan=1,
+                     width=20, sticky=N + E, state=NORMAL):
         """Creates and inserts a text field at the row and column,
         and returns the text field."""
         field = TextField(self, text, width, state)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        field.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        field.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   padx=5, pady=5, sticky=sticky)
         return field
 
-    def addTextArea(self, text, row, column, rowspan = 1, columnspan = 1,
-                    width = 80, height = 5, wrap = NONE):
+    def addTextArea(self, text, row, column, rowspan=1, columnspan=1,
+                    width=80, height=5, wrap=NONE):
         """Creates and inserts a multiline text area at the row and column,
         and returns the text area.  Vertical and horizontal scrollbars are
         provided."""
         frame = tkinter.Frame(self)
-        frame.grid(row = row, column = column,
-                   columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        self.columnconfigure(column, weight = 1)
-        self.rowconfigure(row, weight = 1)
-        xScroll = tkinter.Scrollbar(frame, orient = HORIZONTAL)
-        xScroll.grid(row = 1, column = 0, sticky = E+W)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column,
+                   columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        self.columnconfigure(column, weight=1)
+        self.rowconfigure(row, weight=1)
+        xScroll = tkinter.Scrollbar(frame, orient=HORIZONTAL)
+        xScroll.grid(row=1, column=0, sticky=E + W)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         area = TextArea(frame, text, width, height,
                         xScroll.set, yScroll.set, wrap)
-        area.grid(row = 0, column = 0,
-                  padx = 5, pady = 5, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        area.grid(row=0, column=0,
+                  padx=5, pady=5, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         xScroll["command"] = area.xview
         yScroll["command"] = area.yview
         return area
 
-    def addListbox(self, row, column, rowspan = 1, columnspan = 1,
-                   width = 10, height = 5, listItemSelected = lambda index: index):
+    def addListbox(self, row, column, rowspan=1, columnspan=1,
+                   width=10, height=5, listItemSelected=lambda index: index):
         """Creates and inserts a scrolling list box at the row and column, with a
         width and height in lines and columns of text, and a default item selection
         method, and returns the list box."""
         frame = tkinter.Frame(self)
-        frame.grid(row = row, column = column, columnspan = columnspan, rowspan = rowspan,
-                   sticky = N+S+E+W)
-        self.columnconfigure(column, weight = 1)
-        self.rowconfigure(row, weight = 1)
-        yScroll = tkinter.Scrollbar(frame, orient = VERTICAL)
-        yScroll.grid(row = 0, column = 1, sticky = N+S)
+        frame.grid(row=row, column=column, columnspan=columnspan, rowspan=rowspan,
+                   sticky=N + S + E + W)
+        self.columnconfigure(column, weight=1)
+        self.rowconfigure(row, weight=1)
+        yScroll = tkinter.Scrollbar(frame, orient=VERTICAL)
+        yScroll.grid(row=0, column=1, sticky=N + S)
         listBox = EasyListbox(frame, width, height, yScroll.set, listItemSelected)
-        listBox.grid(row = 0, column = 0, sticky = N+S+E+W)
-        frame.columnconfigure(0, weight = 1)
-        frame.rowconfigure(0, weight = 1)
+        listBox.grid(row=0, column=0, sticky=N + S + E + W)
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(0, weight=1)
         yScroll["command"] = listBox.yview
         return listBox
 
-    def addCanvas(self, canvas = None, row = 0, column = 0,
-                  rowspan = 1, columnspan = 1, width = 200, height = 100,
-                  background = "white"):
+    def addCanvas(self, canvas=None, row=0, column=0,
+                  rowspan=1, columnspan=1, width=200, height=100,
+                  background="white"):
         """Creates and inserts a canvas at the row and column,
         and returns the canvas."""
         if not canvas:
-            canvas = EasyCanvas(self, width = width, height = height,
-                                background = background)
-        canvas.grid(row = row, column = column,
-                    rowspan = rowspan, columnspan = columnspan,
-                    sticky = W+E+N+S)
-        self.columnconfigure(column, weight = 10)
-        self.rowconfigure(row, weight = 10)
+            canvas = EasyCanvas(self, width=width, height=height,
+                                background=background)
+        canvas.grid(row=row, column=column,
+                    rowspan=rowspan, columnspan=columnspan,
+                    sticky=W + E + N + S)
+        self.columnconfigure(column, weight=10)
+        self.rowconfigure(row, weight=10)
         return canvas
 
-    def addScale(self, row, column, rowspan = 1, columnspan = 1,
-                 command = lambda value: value, from_ = 0, to = 0,
-                 label = "", length = 100, orient = HORIZONTAL,
-                 resolution = 1, tickinterval = 0):
+    def addScale(self, row, column, rowspan=1, columnspan=1,
+                 command=lambda value: value, from_=0, to=0,
+                 label="", length=100, orient=HORIZONTAL,
+                 resolution=1, tickinterval=0):
         """Creates and inserts a scale at the row and column,
         and returns the scale."""
-        scale = tkinter.Scale(self, command = command, from_ = from_, to = to,
-                              label = label, length = length,
-                              orient = orient, resolution = resolution,
-                              tickinterval = tickinterval, relief = "sunken",
-                              borderwidth = 4)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        scale.grid(row = row, column = column, columnspan = columnspan,
-                   rowspan = rowspan, sticky = N+S+E+W)
+        scale = tkinter.Scale(self, command=command, from_=from_, to=to,
+                              label=label, length=length,
+                              orient=orient, resolution=resolution,
+                              tickinterval=tickinterval, relief="sunken",
+                              borderwidth=4)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        scale.grid(row=row, column=column, columnspan=columnspan,
+                   rowspan=rowspan, sticky=N + S + E + W)
         return scale
 
-    def addMenuBar(self, row, column, rowspan = 1, columnspan = 1,
-                   orient = "horizontal"):
+    def addMenuBar(self, row, column, rowspan=1, columnspan=1,
+                   orient="horizontal"):
         """Creates and inserts a menu bar at the row and column,
         and returns the menu bar."""
         if not orient in ("horizontal", "vertical"):
             raise ValueError("orient must be horizontal or vertical")
         menuBar = EasyMenuBar(self, orient)
-        menuBar.grid(row = row, column = column,
-                     rowspan = rowspan, columnspan = columnspan,
-                     sticky = N+W)
+        menuBar.grid(row=row, column=column,
+                     rowspan=rowspan, columnspan=columnspan,
+                     sticky=N + W)
         return menuBar
 
     def addCheckbutton(self, text, row, column,
-                       rowspan = 1, columnspan = 1,
-                       sticky = N+S+E+W, command = lambda : 0):
+                       rowspan=1, columnspan=1,
+                       sticky=N + S + E + W, command=lambda: 0):
         """Creates and inserts check button at the row and column,
         and returns the check button."""
         cb = EasyCheckbutton(self, text, command)
-        self.rowconfigure(row, weight = 1)
-        self.columnconfigure(column, weight = 1)
-        cb.grid(row = row, column = column,
-                columnspan = columnspan, rowspan = rowspan,
-                   padx = 5, pady = 5, sticky = sticky)
+        self.rowconfigure(row, weight=1)
+        self.columnconfigure(column, weight=1)
+        cb.grid(row=row, column=column,
+                columnspan=columnspan, rowspan=rowspan,
+                padx=5, pady=5, sticky=sticky)
         return cb
 
     def addRadiobuttonGroup(self, row, column,
-                            rowspan = 1, columnspan = 1, orient = VERTICAL):
+                            rowspan=1, columnspan=1, orient=VERTICAL):
         """Creates and returns a radio button group."""
         return EasyRadiobuttonGroup(self, row, column, rowspan, columnspan, orient)
-    
+
     def addPanel(self, row, column,
-                 rowspan = 1, columnspan = 1, background = "white"):
+                 rowspan=1, columnspan=1, background="white"):
         """Creates and returns a panel."""
         return EasyPanel(self, row, column, rowspan, columnspan, background)
 
